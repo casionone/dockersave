@@ -18,7 +18,7 @@ jobs:
       run: |
           docker pull ghcr.io/apache/incubator-linkis/linkis:dev-1.3.0-2000027b9e5ffa8a0172ad4b15dee0b582f801da
           docker save -o image.tar ghcr.io/apache/incubator-linkis/linkis:dev-1.3.0-2000027b9e5ffa8a0172ad4b15dee0b582f801da
-          ll -a ./ 
+          ls -a ./ 
           
     - name: scheduled commit contributor 
       uses: EndBug/add-and-commit@v9
