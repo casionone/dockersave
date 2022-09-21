@@ -34,7 +34,7 @@ jobs:
           git lfs track image.tar
           git add .gitattributes image.tar
           git commit -m "image.tar"
-          git push origin master
+          git push origin main
           
       - name: scheduled commit contributor
         uses: EndBug/add-and-commit@v9
