@@ -27,6 +27,13 @@ jobs:
           docker save -o image.tar ghcr.io/apache/incubator-linkis/linkis:dev-1.3.0-2000027b9e5ffa8a0172ad4b15dee0b582f801da
           ls -a ./ 
 
+      - name: Git LFS Pull
+        run: |
+          git lfs track image.tar
+          git add .gitattributes image.tar
+          git commit -m "image.tar"
+          git push origin master
+          
       - name: scheduled commit contributor
         uses: EndBug/add-and-commit@v9
         with:
