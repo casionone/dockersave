@@ -29,6 +29,8 @@ jobs:
 
       - name: Git LFS Pull
         run: |
+          git config user.name "casionone"
+          git config user.email "casionone@gamil.com"
           git lfs track image.tar
           git add .gitattributes image.tar
           git commit -m "image.tar"
