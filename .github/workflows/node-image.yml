@@ -1,0 +1,41 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout github repo (+ download lfs dependencies)
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+          
+      - name: Checkout LFS objects
+        run: git lfs checkout
+
+      - name: docker
+        run: |
+          docker pull kindest/node:v1.25.0@sha256:428aaa17ec82ccde0131cb2d1ca6547d13cf5fdabcc0bbecf749baa935387cbf
+          docker save -o kindest-node.tar kindest/node:v1.25.0@sha256:428aaa17ec82ccde0131cb2d1ca6547d13cf5fdabcc0bbecf749baa935387cbf
+          ls -a ./ 
+      - name: Git LFS Pull
+        run: |
+          git config user.name "casionone"
+          git config user.email "casionone@gamil.com"
+          git lfs track kindest-node.tar
+          git add .gitattributes kindest-node.tar
+          git commit -m "kindest-node.tar"
+          git push origin main
+          
+      - name: scheduled commit contributor
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
